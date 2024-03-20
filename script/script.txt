@@ -1,0 +1,173 @@
+ CREATE DATABASE PruebaTecnica;
+
+CREATE TABLE Products (
+    Product_ID VARCHAR(180) PRIMARY KEY,
+    Name VARCHAR(100),
+    Description VARCHAR(255),
+    Price DECIMAL(5,2),
+    Category VARCHAR(50)
+);
+
+CREATE TABLE Suppliers (
+    Supplier_ID VARCHAR(180) PRIMARY KEY,
+    Name VARCHAR(100),
+    Contact VARCHAR(100),
+    Phone VARCHAR(15),
+    Address VARCHAR(255)
+);
+
+CREATE TABLE Inventory (
+	Inventory_ID VARCHAR(180),
+    Product_ID VARCHAR(180),
+    Supplier_ID VARCHAR(180),
+    Quantity INT,
+    Entry_Date DATE,
+    FOREIGN KEY (Product_ID) REFERENCES Products(Product_ID),
+    FOREIGN KEY (Supplier_ID) REFERENCES Suppliers(Supplier_ID)
+);
+
+CREATE TABLE Employees (
+    Employee_ID VARCHAR(180) PRIMARY KEY,
+    Name VARCHAR(100),
+    Position VARCHAR(50),
+    Salary DECIMAL(7,2),
+    Hiring_Date DATE
+);
+
+CREATE TABLE Users (
+    ID_User VARCHAR(180) PRIMARY KEY,
+    Username VARCHAR(50),
+    Password VARCHAR(50),
+    Employee_ID VARCHAR(180),
+    Role VARCHAR(50),
+    FOREIGN KEY (Employee_ID) REFERENCES Employees(Employee_ID)
+);
+
+CREATE TABLE Sales (
+    Sale_ID VARCHAR(180) PRIMARY KEY,
+    Employee_ID VARCHAR(180),
+    Sale_Date DATE,
+    Total DECIMAL(7,2),
+    Payment_Method VARCHAR(50),
+    FOREIGN KEY (Employee_ID) REFERENCES Employees(Employee_ID)
+);
+
+CREATE TABLE Sale_Details (
+    Detail_ID VARCHAR(180) PRIMARY KEY,
+    Sale_ID VARCHAR(180),
+    Product_ID VARCHAR(180),
+    Quantity INT,
+    Subtotal DECIMAL(7,2),
+    FOREIGN KEY (Sale_ID) REFERENCES Sales(Sale_ID),
+    FOREIGN KEY (Product_ID) REFERENCES Products(Product_ID)
+);
+
+CREATE TABLE Customers (
+    Customer_ID VARCHAR(180) PRIMARY KEY,
+    Name VARCHAR(100),
+    Phone VARCHAR(15),
+    Email VARCHAR(100),
+    Address VARCHAR(255)
+);
+
+CREATE TABLE Orders (
+    Order_ID VARCHAR(180) PRIMARY KEY,
+    Customer_ID VARCHAR(180),
+    Order_Date DATE,
+    Delivery_Date DATE,
+    Status VARCHAR(50),
+    FOREIGN KEY (Customer_ID) REFERENCES Customers(Customer_ID)
+);
+
+CREATE TABLE Order_Details (
+    Detail_ID VARCHAR(180) PRIMARY KEY,
+    Order_ID VARCHAR(180),
+    Product_ID VARCHAR(180),
+    Quantity INT,
+    Subtotal DECIMAL(7,2),
+    FOREIGN KEY (Order_ID) REFERENCES Orders(Order_ID),
+    FOREIGN KEY (Product_ID) REFERENCES Products(Product_ID)
+);
+
+
+--- PROCEDURE  VentasPorEmpleado
+
+CREATE PROCEDURE spVentasPorEmpleado
+	 @Anio VARCHAR(50),
+	 @NumTotal INT
+AS
+
+BEGIN
+
+	
+	SELECT 
+    e.Employee_ID AS Employee_ID ,
+	e.Name AS NombreEmpleado,
+	MONTH(s.Sale_Date) AS Mes,
+	@NumTotal AS TotalVentas,
+	s.Total AS PorcentajeContribucion,
+	YEAR(s.Sale_Date) AS Anio
+	FROM 
+		Sales s
+	INNER JOIN 
+		Employees e ON s.Employee_ID = e.Employee_ID
+	WHERE 
+		@Anio IS NULL OR e.Employee_ID = @Anio
+	
+END
+
+
+---- PROCEDURE  SalesReports
+
+CREATE PROCEDURE spSalesReports
+	 @EmployeeID INT,
+	 @StartDate VARCHAR(50),
+	 @EndDate VARCHAR(50),
+	 @cantVenta INT,
+	 @ventaAlta DECIMAL
+AS
+
+BEGIN
+	--- Deckaracion de Variables
+	
+
+	
+	SELECT 
+    p.Product_ID AS [Product_ID],
+    p.Name AS [Name],
+    p.Description AS [Description],
+    p.Category AS [Category],
+    YEAR(s.Sale_Date) AS [Year],
+    CASE
+        WHEN MONTH(s.Sale_Date) = 1 THEN 'Enero'
+        WHEN MONTH(s.Sale_Date) = 2 THEN 'Febrero'
+        WHEN MONTH(s.Sale_Date) = 3 THEN 'Marzo'
+        WHEN MONTH(s.Sale_Date) = 4 THEN 'Abril'
+        WHEN MONTH(s.Sale_Date) = 5 THEN 'Mayo'
+        WHEN MONTH(s.Sale_Date) = 6 THEN 'Junio'
+        WHEN MONTH(s.Sale_Date) = 7 THEN 'Julio'
+        WHEN MONTH(s.Sale_Date) = 8 THEN 'Agosto'
+        WHEN MONTH(s.Sale_Date) = 9 THEN 'Septiembre'
+        WHEN MONTH(s.Sale_Date) = 10 THEN 'Octubre'
+        WHEN MONTH(s.Sale_Date) = 11 THEN 'Noviembre'
+        WHEN MONTH(s.Sale_Date) = 12 THEN 'Diciembre'
+    END AS [Month],
+    @cantVenta AS [CantidadVentasMensual],
+    @ventaAlta AS [CantidadVentaMásAlta],
+    e.Name AS [NombreEmpleado]
+	FROM 
+		Sale_Details sd
+	INNER JOIN 
+		Sales s ON sd.Sale_ID = s.Sale_ID
+	INNER JOIN 
+		Employees e ON s.Employee_ID = e.Employee_ID
+	INNER JOIN 
+		Products p ON sd.Product_ID = p.Product_ID
+	WHERE 
+		@EmployeeID IS NULL 
+		OR @StartDate IS NULL OR @EndDate IS NULL
+		OR e.Employee_ID >= @EmployeeID AND s.Sale_Date >= @StartDate AND s.Sale_Date <= @EndDate 
+	GROUP BY 
+		p.Product_ID, p.Name, p.Description, p.Category, YEAR(s.Sale_Date), 
+		MONTH(s.Sale_Date), e.Name;
+END

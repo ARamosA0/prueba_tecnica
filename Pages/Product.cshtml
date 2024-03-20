@@ -1,0 +1,143 @@
+﻿@page
+@model Prueba_técnica.Pages.ProductModel
+@{
+    ViewData["Title"] = "Product page";
+    Layout = "_layout_index";
+    
+}
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Agregar Productos</h2>
+    </div>
+</div>
+
+<div class="mr-6 border-b border-gray-900/10 pb-12">
+     <form class="space-y-6" method="POST">
+
+        @* KEY CLAVE: asp-for="" *@
+
+            <input type="hidden" asp-for="option" />
+
+            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+                @* Nombre de Producto *@
+                <div class="sm:col-span-3">
+                <label for="first-name" asp-for="producto.Name" class="ml-3 mr-6 block text-sm font-medium leading-6 text-gray-900">Nombre del producto</label>
+                    <div class="mt-2">
+                        <input name="nameProduct" type="text" asp-for="producto.Name" autocomplete="given-name" class="ml-3 mr-6 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                </div>
+
+                @*Descripción de Producto*@
+                <div class="sm:col-span-3">
+                    <label for="Product.Description" class="ml-3 mr-6 block text-sm font-medium leading-6 text-gray-900">Descripción del producto</label>
+                    <div class="mt-2">
+                    <input name="desProduct" type="text" asp-for="producto.Description" autocomplete="family-name" class="ml-3 mr-6  block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                </div>
+
+                @*Precio de Producto*@
+                <div class="sm:col-span-3">
+                    <label for="Product.Price" class="ml-3 mr-6 block text-sm font-medium leading-6 text-gray-900">Precio del producto</label>
+                    <div class="mt-2">
+                    <input name="presProduct" type="number" asp-for="producto.Price" autocomplete="given-name" class="ml-3 mr-6 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                </div>
+
+                @*Categoría de Producto*@
+                <div class="sm:col-span-3">
+                    <label for="country" class="ml-3 mr-6 block text-sm font-medium leading-6 text-gray-900">Categoría</label>
+                    <div class="mt-2">
+                    <select asp-items="null" name="catProduct" asp-for="producto.Category" class="ml-3 mr-6 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option value="">Selecciona una categoría</option>
+                            <option value="pc">PC</option>
+                            <option value="laptops">Laptops</option>
+                            <option value="cellphones">Cellphones</option>
+                            <option value="Tablets">Tablets</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                @if (Model.option == "Editar")
+                {
+                    <button class="ml-3 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Editar producto</button>
+                }
+                else
+                {
+                    <button class="ml-3 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Agregar producto</button>
+                }
+
+                </div>
+            </div>
+
+    </form>
+</div>
+
+<h3 class="mt-10 ml-3 text-2xl font-bold leading-9 tracking-tight text-gray-900">Lista de productos</h3>
+
+<div class="border-b border-gray-900/10 pb-12">
+    <form class="space-y-6" asp-page-handler="Search" method="POST">
+        <input type="hidden" />
+        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div class="sm:col-span-3">
+                <div class="mt-2">
+                    <input name="searchTerm" type="text" placeholder="Buscar producto" class="ml-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                </div>
+            </div>
+            <div>
+                <div class="mt-2">
+                    <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Buscar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@* Tabla/Producto*@
+
+ <div class="ml-9 mr-9 relative overflow-x-auto">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">Nombre</th>
+                <th scope="col" class="px-6 py-3">Descripción</th>
+                <th scope="col" class="px-6 py-3">Precio</th>
+                <th scope="col" class="px-6 py-3">Categoría</th>
+                <th scope="col" class="px-6 py-3">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Products != null)
+            {
+                @foreach (var prod in Model.Products)
+                {
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4">@prod.Name</td>
+                        <td class="px-6 py-4">@prod.Description</td>
+                        <td class="px-6 py-4">@prod.Price</td>
+                        <td class="px-6 py-4">@prod.Category</td>
+                        <td class="px-6 py-4">
+
+                            @* KEY CLAVE: asp-for="" *@
+                            <form method="post" asp-page-handler="Edit">
+                                <input type="hidden" name="Product_id" value="@prod.Product_ID" />
+                                <button type="submit">Editar</button>
+                            </form>
+                            <form method="post" asp-page-handler="Delete">
+                                <input type="hidden" name="id" value="@prod.Product_ID" />
+                                <button type="submit">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <td class="px-6 py-4">No hay productos disponibles</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<br />

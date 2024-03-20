@@ -1,0 +1,14 @@
+Optimizaciones para el Login:
+
+- Como primera optimización, sería utilizar un sistema de autenticación externo como JWT.
+- Podríamos usar el middleware de autenticación de ASP.NET.
+- Podríamos usar atributos de validación en la clase User para validar los campos de entrada.
+- Con respecto a la base de datos, podríamos guardar las contraseñas encriptadas.
+- Siempre es importante usar métodos como ModelState.AddModelError() para mostrar los errores en la página.
+
+Optimización de la Base de Datos:
+
+-  Integrar la validación de datos en la misma clase.
+- El manejo de datos nulos en casos en los que estos puedan ser así, como en fechas de entrega, costos.
+- Podríamos usar tipos de datos para fecha como 'DateTimeOffset', que nos da de forma nativa una compensación de zona horaria.
+- Siempre es importante comentar el código para su mejor entendimiento y mantenimiento.

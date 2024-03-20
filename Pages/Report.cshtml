@@ -1,0 +1,193 @@
+﻿@page "/Report"
+@model Prueba_técnica.Pages.ReportModel
+@{
+    ViewData["Title"] = "Report page";
+    Layout = "_layout_index";
+}
+
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Reports</h2>
+    </div>
+</div>
+
+        @* ---------------------------------------------------------------------------------------------------------------- *@
+                                                 @* Ventas Por Empleado *@
+        @* ---------------------------------------------------------------------------------------------------------------- *@
+<h4 class="mt-10 ml-3 text-2xl font-bold leading-9 tracking-tight text-gray-900">Ventas Por Empleado</h4>
+
+<div class="ml-3 border-b border-gray-900/10 pb-12">
+    
+    @*  Filtros *@
+
+    <form class="space-y-6" method="GET">
+        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div>
+                <div class="mt-2">
+                    <label for="anio">Selecciona un año:</label>
+                </div>
+            </div>
+            <div>
+                <div class="mt-2">
+                    <select id="anio" name="anio" onchange="this.form.submit()" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        @if (Model.SalesSelectAnio != null)
+                        {
+                            @foreach (var a in Model.SalesSelectAnio)
+                            {
+                                <option value="@a" selected="@a">@a</option>
+                            }
+                            <option value="" selected=""></option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@* Tabla Ventas Por Empleado *@
+
+<div class="ml-6 mr-6 relative overflow-x-auto">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">Nombre Empleado</th>
+                <th scope="col" class="px-6 py-3">Mes</th>
+                <th scope="col" class="px-6 py-3">Total Ventas</th>
+                <th scope="col" class="px-6 py-3">Porcentaje Contribución</th>
+            </tr>
+        </thead>
+        <tbody>
+                
+                @if (Model.VentasPorEmpleado != null)
+                {
+                    @foreach (var venta in Model.VentasPorEmpleado)
+                    {
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4">@venta.NombreEmpleado</td>
+                        <td class="px-6 py-4">@venta.Mes</td>
+                        <td class="px-6 py-4">@venta.TotalVentas</td>
+                        <td class="px-6 py-4">@venta.PorcentajeContribucion</td>
+                    </tr>
+                    }
+                }
+                else
+                {
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4">Selecciona un anio</td>
+                    </tr>
+                }
+            </tr>
+                
+        </tbody>
+    </table>
+</div>
+
+
+        @* ---------------------------------------------------------------------------------------------------------------- *@
+                                                 @* Tendencias de Ventas *@
+        @* ---------------------------------------------------------------------------------------------------------------- *@
+
+<h4 class="mt-10 ml-3 text-2xl font-bold leading-9 tracking-tight text-gray-900">Tendencias de Ventas</h4>
+
+<div class="ml-3 border-b border-gray-900/10 pb-12">
+    
+   @*  Filtros *@
+
+    <form id="ventas" class="space-y-6" method="GET">
+        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div>
+                <div class="mt-2">
+                    <label for="start_date">Fecha de inicio:</label>
+                </div>
+            </div>
+            <div>
+                <div class="mt-2">
+                    <input type="date" id="start_date" name="start_date" onchange="this.form.submit()" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                </div>
+            </div>
+            <div>
+                <div class="mt-2">
+                    <label for="end_date">Fecha de fin:</label>
+                </div>
+            </div>
+            <div>
+                <div class="mt-2">
+                    <input type="date" id="end_date" name="end_date" onchange="this.form.submit()" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                </div>
+            </div>
+        </div>
+        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div>
+                <div class="mt-2">
+                    <label for="employee_id">Empleado:</label>
+                </div>
+            </div>
+            <div>
+                <div class="mt-2">
+                    <select id="employee_id" name="employee_id" onchange="this.form.submit()" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        @if (Model.EmpSelectName != null)
+                        {
+                            @foreach (var em in Model.EmpSelectName)
+                            {
+                                <option value="@em.Employee_ID" selected="@em.Name">@em.Name</option>
+                            }
+                            <option value="" selected=""></option>
+                        }
+                        
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@* Tabla Tendencias de Ventas *@
+
+<div class="ml-6 mr-6 relative overflow-x-auto">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">Producto</th>
+                <th scope="col" class="px-6 py-3">Descripcion</th>
+                <th scope="col" class="px-6 py-3">Categoria</th>
+                <th scope="col" class="px-6 py-3">Year</th>
+                <th scope="col" class="px-6 py-3">Month</th>
+                <th scope="col" class="px-6 py-3">Cantidad Ventas Mensual</th>
+                <th scope="col" class="px-6 py-3">Cantidad Venta Más Alta</th>
+                <th scope="col" class="px-6 py-3">Nombre Empleado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.SalesReports != null)
+            {
+                @foreach (var venta in Model.SalesReports)
+                {
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4">@venta.Name</td>
+                        <td class="px-6 py-4">@venta.Description</td>
+                        <td class="px-6 py-4">@venta.Category</td>
+                        <td class="px-6 py-4">@venta.Year</td>
+                        <td class="px-6 py-4">@venta.Month</td>
+                        <td class="px-6 py-4">@venta.CantidadVentasMensual</td>
+                        <td class="px-6 py-4">@venta.CantidadVentaMásAlta</td>
+                        <td class="px-6 py-4">@venta.NombreEmpleado</td>
+                    </tr>
+                }
+            }
+            else 
+            {
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-6 py-4">No hay Datos</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.getElementById("ventas").addEventListener("submit", function (event) {
+        event.preventDefault(); 
+    });
+</script>

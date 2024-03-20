@@ -1,0 +1,144 @@
+﻿@page "/"
+@model IndexModel
+@{
+    ViewData["Title"] = "Reto Técnico de Desarrollo de Software";
+    Layout = "_layout_index";
+}
+<br />
+
+<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10">
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="p-6 bg-white border-b border-gray-200">
+            <h2 class="text-lg leading-6 font-medium text-gray-900">Reto Técnico de Desarrollo de Software</h2>
+            <p class="mt-1 text-sm text-gray-600">
+                Sigue las instrucciones y recomendaciones cuidadosamente para completar el reto técnico.
+            </p>
+
+            <!-- Recomendaciones Generales -->
+            <div class="mt-6">
+                <h3 class="text-md font-semibold text-gray-900">Recomendaciones Generales</h3>
+                <ul class="mt-2 list-disc list-inside text-sm text-gray-600">
+                    <li>Utiliza todas las herramientas a tu disposición para resolver las tareas de manera eficaz.</li>
+                    <li>Mantén un enfoque honesto y profesional en todo momento durante el reto. <strong>Este es estrictamente personal.</strong></li>
+                    <li>La duración de la prueba está diseñada para ser completada en un tiempo razonable. Planifica tu trabajo adecuadamente. Debes enviar la prueba antes de la media noche de este domingo</li>
+                    <li>Echar un vistazo al ejemplo de código de inicio de sesión para tener una perspectiva sobre su funcionamiento.</li>
+                </ul>
+            </div>
+
+            <!-- Requisitos Técnicos -->
+            <div class="mt-6">
+                <h3 class="text-md font-semibold text-gray-900">Requisitos Técnicos</h3>
+                <ul class="mt-2 list-disc list-inside text-sm text-gray-600">
+                    <li>Usar Visual Studio 2022 para el desarrollo del proyecto.</li>
+                    <li>Implementar la base de datos en SQL Server bajo el nombre de PruebaTecnica. 
+                        Actualizar la cadena de conexión que se encuentra en el archivo appsetting.json.
+                    </li>
+                    <li>El script de la BD estará adjuntado bajo el nombre de scripts.sql.</li>
+                    <li>Asegurarse de que el código fuente esté bien organizado y comentado.</li>
+                </ul>
+            </div>
+
+            <!-- Forma de Envío y Contacto -->
+            <div class="mt-6">
+                <h3 class="text-md font-semibold text-gray-900">Forma de Envío y Contacto</h3>
+                <p class="mt-2 text-sm text-gray-600">
+                    Envía tu prueba completada y cualquier archivo requerido al siguiente correo electrónico: <a href="mailto:joinus@intigrate.net" class="text-blue-600 hover:text-blue-800">joinus@intigrate.net</a>. Asegúrate de incluir en el asunto del correo el formato "Reto Técnico - [Tu Nombre]".
+                </p>
+            </div>
+
+            <!-- Instrucciones Específicas del Reto -->
+            <div class="mt-6">
+                <h3 class="text-md font-semibold text-gray-900">Instrucciones Específicas del Reto</h3>
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Producto
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Instrucciones
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Requisitos
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- CRUD -->
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td class="px-6 py-4">
+                                CRUD
+                            </td>
+                            <td class="px-6 py-4">
+                                Crear un CRUD para Productos.
+                            </td>
+                            <td class="px-6 py-4">
+                                Desarrollar la funcionalidad en las páginas Product.cshtml y Product.cshtml.cs.
+                            </td>
+                        </tr>
+                        <!-- Tabla/Producto -->
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td class="px-6 py-4">
+                                Tabla/Producto
+                            </td>
+                            <td class="px-6 py-4">
+                                Mostrar una lista de productos existentes.
+                            </td>
+                            <td class="px-6 py-4">
+                                Presentar la lista en una tabla dentro de la página Product.cshtml.
+                            </td>
+                        </tr>
+                        <!-- Análisis de ventas -->
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td class="px-6 py-4">
+                                Análisis de ventas
+                            </td>
+                            <td class="px-6 py-4">
+                                El cliente no tiene la capacidad de analizar las tendencias de ventas de sus productos a lo largo del tiempo y el detalle de cada venta y cantidad de ventas mensuales.
+                            </td>
+                            <td class="px-6 py-4">
+                                Usar procedimiento almacenado - Realizarlo en Report.cshtml/Report.cs. FILTROS: Rango de fechas, Empleado.
+                            </td>
+                        </tr>
+                        <!-- Área de ventas -->
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td class="px-6 py-4">
+                                Área de ventas
+                            </td>
+                            <td class="px-6 py-4">
+                                El área de ventas necesita poder ver normalizados los datos, que muestre las ventas de cada empleado por mes, además del porcentaje que representa del total de ventas del mes.
+                            </td>
+                            <td class="px-6 py-4">
+                                Usar procedimiento almacenado - Realizarlo en Report.cshtml/Report.cs. FILTROS: Año.
+                            </td>
+                        </tr>
+                        <!-- Optimizaciones -->
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td class="px-6 py-4">
+                                Optimizaciones
+                            </td>
+                            <td class="px-6 py-4">
+                                Recomendaciones para optimizar el proceso de inicio de sesión en cuanto al front-end, back-end y la base de datos.
+                            </td>
+                            <td class="px-6 py-4">
+                                Adjuntar su respuesta en un archivo .txt al momento de enviar la prueba.
+                            </td>
+                        </tr>
+                        <!-- Optimización BD -->
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td class="px-6 py-4">
+                                Optimización BD
+                            </td>
+                            <td class="px-6 py-4">
+                                Revisa y analiza las clases del proyecto relacionadas con la Base de Datos. Basándote en estas clases, ¿qué recomendaciones harías para mejorarlas?
+                            </td>
+                            <td class="px-6 py-4">
+                                Adjuntar su respuesta en un archivo .txt al momento de enviar la prueba.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

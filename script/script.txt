@@ -17,7 +17,7 @@ CREATE TABLE Suppliers (
 );
 
 CREATE TABLE Inventory (
-	Inventory_ID VARCHAR(180),
+	VARCHAR(180),
     Product_ID VARCHAR(180),
     Supplier_ID VARCHAR(180),
     Quantity INT,
@@ -88,6 +88,100 @@ CREATE TABLE Order_Details (
     FOREIGN KEY (Order_ID) REFERENCES Orders(Order_ID),
     FOREIGN KEY (Product_ID) REFERENCES Products(Product_ID)
 );
+
+
+--- INSERT
+--- INSERT PRODUCTS
+INSERT INTO Products (Product_ID, Name, Description ,Price ,Category) VALUES (1, 'PC', 'PC de alta gama', 500.10, 'pc')
+INSERT INTO Products (Product_ID, Name, Description ,Price ,Category) VALUES (2, 'laptop', 'laptop de alta gama', 300, 'laptop')
+INSERT INTO Products (Product_ID, Name, Description ,Price ,Category) VALUES (3, 'cellphone', 'cellphone de alta gama', 200, 'cellphone')
+INSERT INTO Products (Product_ID, Name, Description ,Price ,Category) VALUES (4, 'tablet', 'tablet de alta gama', 259, 'tablet')
+INSERT INTO Products (Product_ID, Name, Description ,Price ,Category) VALUES (5, 'laptop 2', 'laptop de baja gama', 120, 'laptop')
+
+--- INSERT PRODUCTS
+INSERT INTO Suppliers (Supplier_ID, Name, Contact, Phone ,Address ) VALUES (1, 'suplier1', 'contact1', '298374656', 'addres1')
+INSERT INTO Suppliers (Supplier_ID, Name, Contact, Phone ,Address ) VALUES (2, 'suplier2', 'contact2', '871653983', 'addres2')
+INSERT INTO Suppliers (Supplier_ID, Name, Contact, Phone ,Address ) VALUES (3, 'suplier3', 'contact3', '918625321', 'addres3')
+
+---INSERT INVENTORY
+INSERT INTO Inventory (Inventory_ID, Product_ID, Supplier_ID, Quantity, Entry_Date) VALUES (1, 1, 1, 10, '2024-03-19')
+INSERT INTO Inventory (Inventory_ID, Product_ID, Supplier_ID, Quantity, Entry_Date) VALUES (2, 2, 2, 20, '2024-04-19')
+INSERT INTO Inventory (Inventory_ID, Product_ID, Supplier_ID, Quantity, Entry_Date) VALUES (3, 3, 3, 30, '2024-05-19')
+
+---INSERT EMPLOYEES
+INSERT INTO Employees (Employee_ID, Name, Position, Salary, Hiring_Date) VALUES (1, 'Jimi Rose', 'Sale', 1000, '2024-03-19')
+INSERT INTO Employees (Employee_ID, Name, Position, Salary, Hiring_Date) VALUES (2, 'Alex Hernandez', 'Sale', 1000, '2024-03-19')
+INSERT INTO Employees (Employee_ID, Name, Position, Salary, Hiring_Date) VALUES (3, 'Sheila Crisman', 'Sale', 1000, '2024-03-19')
+
+---INSERT USERS
+INSERT INTO Users (ID_User, Username, Password, Employee_ID, Role) VALUES (1, 'jr', 'jr', 1, 'admin')
+INSERT INTO Users (ID_User, Username, Password, Employee_ID, Role) VALUES (2, 'ah', 'ah', 2, 'admin')
+INSERT INTO Users (ID_User, Username, Password, Employee_ID, Role) VALUES (3, 'sc', 'sc', 3, 'admin')
+
+---INSER SALES
+INSERT INTO Sales (Sale_ID, Employee_ID, Sale_Date, Total, Payment_Method) VALUES (1, 1, '2024-03-19', 100, 'tarjeta')
+INSERT INTO Sales (Sale_ID, Employee_ID, Sale_Date, Total, Payment_Method) VALUES (2, 2, '2024-03-19', 100, 'tarjeta')
+INSERT INTO Sales (Sale_ID, Employee_ID, Sale_Date, Total, Payment_Method) VALUES (3, 3, '2024-03-19', 100, 'tarjeta')
+INSERT INTO Sales (Sale_ID, Employee_ID, Sale_Date, Total, Payment_Method) VALUES (4, 1, '2024-04-19', 100, 'tarjeta')
+INSERT INTO Sales (Sale_ID, Employee_ID, Sale_Date, Total, Payment_Method) VALUES (5, 2, '2024-04-19', 100, 'tarjeta')
+INSERT INTO Sales (Sale_ID, Employee_ID, Sale_Date, Total, Payment_Method) VALUES (6, 3, '2024-04-19', 100, 'tarjeta')
+INSERT INTO Sales (Sale_ID, Employee_ID, Sale_Date, Total, Payment_Method) VALUES (7, 1, '2024-05-19', 100, 'tarjeta')
+INSERT INTO Sales (Sale_ID, Employee_ID, Sale_Date, Total, Payment_Method) VALUES (8, 2, '2024-05-19', 100, 'tarjeta')
+INSERT INTO Sales (Sale_ID, Employee_ID, Sale_Date, Total, Payment_Method) VALUES (9, 3, '2024-05-19', 100, 'tarjeta')
+INSERT INTO Sales (Sale_ID, Employee_ID, Sale_Date, Total, Payment_Method) VALUES (10, 1, '2024-06-19', 100, 'tarjeta')
+INSERT INTO Sales (Sale_ID, Employee_ID, Sale_Date, Total, Payment_Method) VALUES (11, 2, '2024-06-19', 100, 'tarjeta')
+INSERT INTO Sales (Sale_ID, Employee_ID, Sale_Date, Total, Payment_Method) VALUES (12, 3, '2024-06-19', 100, 'tarjeta')
+
+---INSERT SALE_DETAILS
+INSERT INTO Sale_Details (Detail_ID, Sale_ID, Product_ID, Quantity, Subtotal) VALUES (1, 1, 1, 10, 1000)
+INSERT INTO Sale_Details (Detail_ID, Sale_ID, Product_ID, Quantity, Subtotal) VALUES (2, 2, 2, 10, 1000)
+INSERT INTO Sale_Details (Detail_ID, Sale_ID, Product_ID, Quantity, Subtotal) VALUES (3, 3, 3, 10, 1000)
+INSERT INTO Sale_Details (Detail_ID, Sale_ID, Product_ID, Quantity, Subtotal) VALUES (4, 4, 4, 10, 1000)
+INSERT INTO Sale_Details (Detail_ID, Sale_ID, Product_ID, Quantity, Subtotal) VALUES (5, 5, 5, 10, 1000)
+INSERT INTO Sale_Details (Detail_ID, Sale_ID, Product_ID, Quantity, Subtotal) VALUES (6, 6, 1, 10, 1000)
+INSERT INTO Sale_Details (Detail_ID, Sale_ID, Product_ID, Quantity, Subtotal) VALUES (7, 7, 2, 10, 1000)
+INSERT INTO Sale_Details (Detail_ID, Sale_ID, Product_ID, Quantity, Subtotal) VALUES (8, 8, 3, 10, 1000)
+INSERT INTO Sale_Details (Detail_ID, Sale_ID, Product_ID, Quantity, Subtotal) VALUES (9, 9, 4, 10, 1000)
+INSERT INTO Sale_Details (Detail_ID, Sale_ID, Product_ID, Quantity, Subtotal) VALUES (10, 10, 5, 10, 1000)
+INSERT INTO Sale_Details (Detail_ID, Sale_ID, Product_ID, Quantity, Subtotal) VALUES (11, 11, 1, 10, 1000)
+INSERT INTO Sale_Details (Detail_ID, Sale_ID, Product_ID, Quantity, Subtotal) VALUES (12, 12, 2, 10, 1000)
+
+---INSER CUSTOMER
+INSERT INTO Customers (Customer_ID, Name, Phone, Email, Address) VALUES (1, 'customer1', '827165345', 'emain1@email', 'addres1')
+INSERT INTO Customers (Customer_ID, Name, Phone, Email, Address) VALUES (2, 'customer2', '817356421', 'emain2@email', 'addres2')
+INSERT INTO Customers (Customer_ID, Name, Phone, Email, Address) VALUES (3, 'customer3', '981763512', 'emain3@email', 'addres3')
+
+---INSER ORDERS
+INSERT INTO Orders (Order_ID, Customer_ID, Order_Date, Delivery_Date, Status) VALUES (1, 1, '2024-03-19', '2024-03-19', 'E')
+INSERT INTO Orders (Order_ID, Customer_ID, Order_Date, Delivery_Date, Status) VALUES (2, 2, '2024-04-19', '2024-04-19', 'E')
+INSERT INTO Orders (Order_ID, Customer_ID, Order_Date, Delivery_Date, Status) VALUES (3, 3, '2024-05-19', '2024-05-19', 'E')
+INSERT INTO Orders (Order_ID, Customer_ID, Order_Date, Delivery_Date, Status) VALUES (4, 1, '2024-03-19', '2024-03-19', 'E')
+INSERT INTO Orders (Order_ID, Customer_ID, Order_Date, Delivery_Date, Status) VALUES (5, 2, '2024-04-19', '2024-04-19', 'E')
+INSERT INTO Orders (Order_ID, Customer_ID, Order_Date, Delivery_Date, Status) VALUES (6, 3, '2024-05-19', '2024-05-19', 'E')
+INSERT INTO Orders (Order_ID, Customer_ID, Order_Date, Delivery_Date, Status) VALUES (7, 1, '2024-03-19', '2024-03-19', 'E')
+INSERT INTO Orders (Order_ID, Customer_ID, Order_Date, Delivery_Date, Status) VALUES (8, 2, '2024-04-19', '2024-04-19', 'E')
+INSERT INTO Orders (Order_ID, Customer_ID, Order_Date, Delivery_Date, Status) VALUES (9, 3, '2024-06-19', '2024-05-19', 'E')
+INSERT INTO Orders (Order_ID, Customer_ID, Order_Date, Delivery_Date, Status) VALUES (10, 1, '2024-03-19', '2024-03-19', 'E')
+INSERT INTO Orders (Order_ID, Customer_ID, Order_Date, Delivery_Date, Status) VALUES (11, 2, '2024-04-19', '2024-04-19', 'E')
+INSERT INTO Orders (Order_ID, Customer_ID, Order_Date, Delivery_Date, Status) VALUES (12, 3, '2024-06-19', '2024-05-19', 'E')
+
+---INSERT ORDER_DETAILS
+INSERT INTO Orders (Detail_ID, Order_ID, Product_ID, Quantity, Subtotal) VALUES (1, 1, 1, 10, 239)
+INSERT INTO Orders (Detail_ID, Order_ID, Product_ID, Quantity, Subtotal) VALUES (2, 2, 2, 10, 239)
+INSERT INTO Orders (Detail_ID, Order_ID, Product_ID, Quantity, Subtotal) VALUES (3, 3, 3, 10, 239)
+INSERT INTO Orders (Detail_ID, Order_ID, Product_ID, Quantity, Subtotal) VALUES (4, 4, 4, 10, 239)
+INSERT INTO Orders (Detail_ID, Order_ID, Product_ID, Quantity, Subtotal) VALUES (5, 5, 5, 10, 239)
+INSERT INTO Orders (Detail_ID, Order_ID, Product_ID, Quantity, Subtotal) VALUES (6, 6, 1, 10, 239)
+INSERT INTO Orders (Detail_ID, Order_ID, Product_ID, Quantity, Subtotal) VALUES (7, 7, 2, 10, 239)
+INSERT INTO Orders (Detail_ID, Order_ID, Product_ID, Quantity, Subtotal) VALUES (8, 8, 3, 10, 239)
+INSERT INTO Orders (Detail_ID, Order_ID, Product_ID, Quantity, Subtotal) VALUES (9, 9, 4, 10, 239)
+INSERT INTO Orders (Detail_ID, Order_ID, Product_ID, Quantity, Subtotal) VALUES (10, 10, 5, 10, 239)
+INSERT INTO Orders (Detail_ID, Order_ID, Product_ID, Quantity, Subtotal) VALUES (11, 11, 2, 10, 239)
+INSERT INTO Orders (Detail_ID, Order_ID, Product_ID, Quantity, Subtotal) VALUES (12, 12, 3, 10, 239)
+
+
+
+
 
 
 --- PROCEDURE  VentasPorEmpleado
